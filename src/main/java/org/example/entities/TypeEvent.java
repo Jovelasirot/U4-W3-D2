@@ -1,5 +1,5 @@
 package org.example.entities;
 
-public enum typeEvent {
+public enum TypeEvent {
     PUBLIC, PRIVATE
 }

@@ -1,21 +1,40 @@
 package org.example.entities;
 
-public class Event {
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
+@Entity
+public class Event {
+    @Column(name = "event_date")
+    protected LocalDate eventDate;
+    @Id
+    @GeneratedValue
     private long id;
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
 
-    private typeEvent typeEvent;
+    @Column(name = "type_event")
+    @Enumerated(EnumType.STRING)
+    private TypeEvent typeEvent;
 
+    @Column(name = "max_participant")
     private int maxParticipant;
 
-    public Event(long id, String title, String description, org.example.entities.typeEvent typeEvent, int maxParticipant) {
-        this.id = id;
+    public Event() {
+    }
+
+    public Event(String title, LocalDate eventDate, String description, TypeEvent typeEvent, int maxParticipant) {
+
         this.title = title;
+        this.eventDate = eventDate;
         this.description = description;
         this.typeEvent = typeEvent;
         this.maxParticipant = maxParticipant;
+
     }
 
     public long getId() {
@@ -42,11 +61,11 @@ public class Event {
         this.description = description;
     }
 
-    public org.example.entities.typeEvent getTypeEvent() {
+    public TypeEvent getTypeEvent() {
         return typeEvent;
     }
 
-    public void setTypeEvent(org.example.entities.typeEvent typeEvent) {
+    public void setTypeEvent(TypeEvent typeEvent) {
         this.typeEvent = typeEvent;
     }
 
