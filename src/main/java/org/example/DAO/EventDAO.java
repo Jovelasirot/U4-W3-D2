@@ -27,7 +27,7 @@ public class EventDAO {
         return event;
     }
 
-    public void findByIdAndDelete(long eventId) {
+    public void deleteById(long eventId) {
 
         Event eventFound = this.findById(eventId);
 
@@ -38,7 +38,7 @@ public class EventDAO {
         em.remove(eventFound);
 
         transaction.commit();
-        System.out.println("Event with id: " + eventFound.getId() + "deleted correctly");
+        System.out.println("Event with id: " + eventFound.getId() + " was successfully deleted");
 
 
     }

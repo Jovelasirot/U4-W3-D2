@@ -7,10 +7,9 @@ import jakarta.persistence.Persistence;
 import org.example.DAO.EventDAO;
 import org.example.entities.Event;
 import org.example.entities.TypeEvent;
+import org.example.exeptions.NotFoundException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -19,16 +18,28 @@ public class Application {
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
-        EventDAO sd = new EventDAO(em);
+        EventDAO eDAO = new EventDAO(em);
 
-        Supplier<Event> eventSupplier = getEventSupplier();
-        List<Event> eventList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            eventList.add(eventSupplier.get());
+//        Supplier<Event> eventSupplier = getEventSupplier();
+//        List<Event> eventList = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            eventList.add(eventSupplier.get());
+//        }
+//
+//        eventList.forEach(eDAO::save);
+
+        try {
+            Event eventA = eDAO.findById(61);
+            System.out.println(eventA);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
         }
 
-        eventList.forEach(sd::save);
-        System.out.println("It worked ig");
+        try {
+            eDAO.deleteById(57);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         em.close();
         emf.close();
