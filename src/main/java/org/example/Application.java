@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class Application {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U4W3D2");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("eventManager");
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
